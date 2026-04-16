@@ -1,3 +1,5 @@
 .env
 superset_home/
 __pycache__/
+.env
+.ssh/
