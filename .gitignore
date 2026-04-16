@@ -1,5 +1,9 @@
 .env
-superset_home/
-__pycache__/
-.env
 .ssh/
+044642*
+.cache/
+.bash*
+.profile
+.gitconfig
+.sudo_as_admin_successful
+*.swp
