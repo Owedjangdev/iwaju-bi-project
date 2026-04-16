@@ -1,11 +1,8 @@
-import os
+# 1. La clé de sécurité (obligatoire pour corriger ton erreur précédente)
+SECRET_KEY = 'OfRtSACerJohbnbcjfFOGpRqXd0T7Rb68EoHokKVFbQGpjjpTjFRDnt7'
 
-# 1. Clé de sécurité récupérée dynamiquement
-SECRET_KEY = os.getenv('SUPERSET_SECRET_KEY')
+# 2. La connexion à la base de données
+SQLALCHEMY_DATABASE_URI = 'postgresql://superset:superset123@db:5432/superset'
 
-# 2. Connexion DB sécurisée
-DB_PASS = os.getenv('POSTGRES_PASSWORD')
-SQLALCHEMY_DATABASE_URI = f'postgresql://superset:{DB_PASS}@db:5432/superset'
-
-# 3. Langue
+# 3. La langue en français (optionnel mais recommandé pour ton test)
 BABEL_DEFAULT_LOCALE = 'fr'

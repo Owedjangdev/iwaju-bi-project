@@ -1,18 +1,15 @@
 version: "3.8"
-
 services:
   db:
     image: postgres:15
     container_name: superset_db
     environment:
-      POSTGRES_DB: superset
-      POSTGRES_USER: superset
-      
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
-
   superset:
     image: apache/superset:3.1.0
     container_name: superset_app
@@ -20,7 +17,6 @@ services:
       - "8088:8088"
     environment:
       SUPERSET_CONFIG_PATH: /app/pythonpath/superset_config.py
-      
       SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY}
     volumes:
       - superset_home:/app/superset_home
@@ -28,7 +24,6 @@ services:
     depends_on:
       - db
     restart: always
-
 volumes:
   postgres_data:
   superset_home:
