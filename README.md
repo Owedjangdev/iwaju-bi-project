@@ -1,113 +1,87 @@
+cat <<EOF > README.md
 # IWAJU Sales Intelligence — Infrastructure BI & Analytics
 
-Déploiement d'une plateforme de Business Intelligence complète basée sur Apache Superset, PostgreSQL et Docker, dans le cadre du Challenge Technique IWAJU TECH.
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Apache Superset](https://img.shields.io/badge/Apache%20Superset-0073B7?style=for-the-badge&logo=apache-superset&logoColor=white)](https://superset.apache.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+
+Déploiement d'une plateforme de Business Intelligence complète basée sur **Apache Superset**, **PostgreSQL** et **Docker**, réalisée dans le cadre du Challenge Technique **IWAJU TECH**.
+
+## 🏗 Architecture du Système
+
+L'infrastructure est déployée sur une machine virtuelle isolée :
+- **Hôte :** Ubuntu Desktop
+- **VM :** Ubuntu Server 22.04 LTS (KVM/QEMU)
+- **Conteneurisation :** Docker & Docker Compose
+  - \`superset_app\` : Application Apache Superset 3.1.0
+  - \`superset_db\` : Base de données PostgreSQL 15
 
 ---
 
-## Architecture du projet
-
-Machine Hôte (Ubuntu Desktop)
-└── VM Ubuntu Server 22.04 (KVM/QEMU)
-    └── Docker
-        ├── superset_db   (PostgreSQL 15)
-        └── superset_app  (Apache Superset 3.1.0)
-
----
-
-## Stack technique
+## 🛠 Stack Technique
 
 | Composant | Technologie |
-|-----------|-------------|
-| Virtualisation | Ubuntu Server 22.04 LTS (KVM/QEMU) |
-| Conteneurisation | Docker & Docker Compose |
-| Plateforme BI | Apache Superset 3.1.0 |
-| Base de données | PostgreSQL 15 |
+| :--- | :--- |
+| **Virtualisation** | Ubuntu Server 22.04 LTS |
+| **Conteneurisation** | Docker & Docker Compose |
+| **Plateforme BI** | Apache Superset 3.1.0 |
+| **Base de données** | PostgreSQL 15 |
+| **Sécurité** | Variables d'environnement (\`.env\`) |
 
 ---
 
-## Structure du dépôt
+## 📂 Structure du Dépôt
 
+\`\`\`text
 iwaju-bi-project/
-├── docker-compose.yml      # Orchestration des services
-├── superset_config.py      # Configuration Superset (PostgreSQL, Secret Key)
-└── README.md               # Documentation
+├── docker-compose.yml     # Orchestration des conteneurs
+├── superset_config.py     # Configuration avancée de Superset
+├── .env.example           # Modèle des variables d'environnement
+├── .gitignore             # Exclusion des fichiers sensibles et système
+└── README.md              # Documentation du projet
+\`\`\`
 
 ---
 
-## Prérequis
+## 🚀 Installation et Déploiement
 
-- Ubuntu Server 22.04 LTS
-- Docker >= 20.x
-- Docker Compose >= 1.29
-- Git
-
----
-
-## Installation et Déploiement
-
-### 1. Cloner le dépôt
-
+### 1. Cloner le projet
+\`\`\`bash
 git clone https://github.com/Owedjangdev/iwaju-bi-project.git
 cd iwaju-bi-project
+cp .env.example .env
+\`\`\`
 
-### 2. Lancer les services
-
+### 2. Lancer l'infrastructure
+Les volumes Docker (\`postgres_data\` et \`superset_home\`) assurent la **persistance des données**.
+\`\`\`bash
 docker-compose up -d
-
-Les services suivants démarrent automatiquement :
-- superset_db  : PostgreSQL 15 sur le port 5432
-- superset_app : Apache Superset sur le port 8088
+\`\`\`
 
 ### 3. Initialiser Superset
-
+\`\`\`bash
 docker exec -it superset_app pip install psycopg2-binary
-
 docker exec -it superset_app superset db upgrade
-
-docker exec -it superset_app superset fab create-admin \
-  --username admin \
-  --firstname Epiphane \
-  --lastname Houehanou \
-  --email admin@iwaju.com \
-  --password <votre_mot_de_passe>
-
+docker exec -it superset_app superset fab create-admin --username admin --firstname Epiphane --lastname Houehanou --email admin@iwaju.com --password admin
 docker exec -it superset_app superset init
-
-### 4. Accéder a l interface
-
-Ouvrir dans le navigateur depuis la machine hote :
-
-http://<IP_VM>:8088
-
-Identifiants : admin / votre_mot_de_passe
+\`\`\`
 
 ---
 
-## Persistance des données
+## 📊 Dashboard : IWAJU Sales Intelligence
 
-Les volumes Docker garantissent que les données survivent aux redémarrages :
+Le dashboard transforme le dataset "Superstore Sales" en indicateurs de performance clés :
 
-- postgres_data  : Données PostgreSQL
-- superset_home  : Configuration et métadonnées Superset
-
----
-
-## Dashboard — IWAJU Sales Intelligence
-
-Le dashboard est construit à partir du dataset Superstore Sales (8 400 lignes) et intègre 5 visualisations :
-
-| Graphique | Type | Indicateur |
-|-----------|------|------------|
-| Total Sales | Big Number (KPI) | Ventes globales : 14.9M |
-| Total Profit | Big Number (KPI) | Profit total : 1.52M |
-| Sales Over Time | Line Chart | Evolution temporelle des ventes |
-| Sales by Category | Pie Chart | Répartition par catégories de produits |
-| Sales by Region | Bar Chart | Répartition par zones géographiques |
+* **KPIs :** Ventes Globales et Profit Total.
+* **Analyses Visuelles :**
+    * Évolution temporelle des ventes.
+    * Répartition des ventes par **Catégorie de produits**.
+    * Analyse géographique par **Région** (Région "West" identifiée comme leader).
 
 ---
 
-## Auteur
-
-HOUEHANOU Epiphane Owédjangnon
-Challenge Technique — IWAJU TECH
-Avril 2026
+## 👨‍💻 Auteur
+**HOUEHANOU Epiphane Owédjangnon**
+*Challenge Technique — IWAJU TECH*
+Échéance : 19 Avril 2026
+EOF
