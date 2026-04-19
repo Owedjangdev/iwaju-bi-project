@@ -1,4 +1,4 @@
-cat <<EOF > README.md
+
 # IWAJU Sales Intelligence — Infrastructure BI & Analytics
 
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
@@ -7,7 +7,7 @@ cat <<EOF > README.md
 
 Déploiement d'une plateforme de Business Intelligence complète basée sur **Apache Superset**, **PostgreSQL** et **Docker**, réalisée dans le cadre du Challenge Technique **IWAJU TECH**.
 
-## 🏗 Architecture du Système
+## Architecture du Système
 
 L'infrastructure est déployée sur une machine virtuelle isolée :
 - **Hôte :** Ubuntu Desktop
@@ -18,7 +18,7 @@ L'infrastructure est déployée sur une machine virtuelle isolée :
 
 ---
 
-## 🛠 Stack Technique
+##  Stack Technique
 
 | Composant | Technologie |
 | :--- | :--- |
@@ -30,7 +30,7 @@ L'infrastructure est déployée sur une machine virtuelle isolée :
 
 ---
 
-## 📂 Structure du Dépôt
+## Structure du Dépôt
 
 \`\`\`text
 iwaju-bi-project/
@@ -43,7 +43,7 @@ iwaju-bi-project/
 
 ---
 
-## 🚀 Installation et Déploiement
+## Installation et Déploiement
 
 ### 1. Cloner le projet
 \`\`\`bash
@@ -80,7 +80,7 @@ Le dashboard transforme le dataset "Superstore Sales" en indicateurs de performa
 
 ---
 
-## 👨‍💻 Auteur
+## Auteur
 **HOUEHANOU Epiphane Owédjangnon**
 *Challenge Technique — IWAJU TECH*
 Échéance : 19 Avril 2026
